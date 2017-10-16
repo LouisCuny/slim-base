@@ -1,14 +1,13 @@
 {
-    "name": "awurth/slim-base",
-    "description": "Boilerplate for Slim PHP micro-framework",
+    "name": "LouisCuny/slim-base",
+    "description": "Boilerplate for Slim PHP micro-framework - forked from awurth/slim-base",
     "keywords": ["slim", "eloquent", "twig", "framework", "boilerplate", "skeleton"],
-    "homepage": "https://github.com/awurth/slim-base",
-    "license": "MIT",
+    "homepage": "https://github.com/LouisCuny/slim-base",
     "authors": [
         {
-            "name": "Alexis Wurth",
-            "email": "alexis.wurth57@gmail.com",
-            "homepage": "https://github.com/awurth"
+            "name": "Louis Cuny",
+            "email": "louis-cuny@orange.fr",
+            "homepage": "https://github.com/LouisCuny"
         }
     ],
     "autoload": {
@@ -17,11 +16,9 @@
         }
     },
     "require": {
-        "awurth/slim-validation": "^3.0",
         "cartalyst/sentinel": "^2.0",
         "illuminate/database": "^5.4",
         "illuminate/events": "^5.4",
-        "incenteev/composer-parameter-handler": "^2.1",
         "monolog/monolog": "^1.23",
         "respect/validation": "^1.1",
         "slim/csrf": "^0.8.1",
@@ -34,17 +31,6 @@
         "sort-packages": true
     },
     "scripts": {
-        "start": "php -S 0.0.0.0:8080 -t public public/index.php",
-        "post-install-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ],
-        "post-update-cmd": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters"
-        ]
-    },
-    "extra": {
-        "incenteev-parameters": {
-            "file": "app/parameters.yml"
-        }
+        "start": "php -S 0.0.0.0:1111 -t public public/index.php"
     }
 }
