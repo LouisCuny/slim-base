@@ -9,14 +9,15 @@ use Illuminate\Database\Capsule\Manager;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Monolog\Processor\UidProcessor;
+use Security\TwigExtension\CsrfExtension;
+use Slim\Csrf\Guard;
 use Slim\Flash\Messages;
 use Slim\Views\Twig;
 use Slim\Views\TwigExtension;
 use Symfony\Component\Yaml\Yaml;
+use Twig\Extension\DebugExtension;
 
-$container = $app->getContainer();
-
-$parameters = Yaml::parse(file_get_contents(__DIR__ . '/parameters.yml'))['parameters'];
+$parameters = Yaml::parse(file_get_contents(__DIR__ . '/config/parameters.yml'))['parameters'];
 
 $capsule = new Manager();
 $capsule->addConnection($parameters);
@@ -28,7 +29,7 @@ $container['db'] = function () use ($capsule) {
 };
 
 $container['auth'] = function () {
-    $sentinel = new Sentinel(new SentinelBootstrapper(__DIR__ . '/sentinel.php'));
+    $sentinel = new Sentinel(new SentinelBootstrapper(__DIR__ . '/config/sentinel.php'));
 
     return $sentinel->getSentinel();
 };
@@ -37,28 +38,31 @@ $container['flash'] = function () {
     return new Messages();
 };
 
+$container['csrf'] = function ($container) {
+    $guard = new Guard();
+    $guard->setFailureCallable($container['csrfFailureHandler']);
+
+    return $guard;
+};
+
+// https://github.com/awurth/slim-validation
 $container['validator'] = function () {
     return new Validator();
 };
 
 $container['view'] = function ($container) {
-    $settings = $container['settings'];
+    $config = $container['config'];
 
-    $view = new Twig(
-        $settings['view']['templates_path'],
-        $settings['view']['twig']
-    );
+    $view = new Twig($config['twig']['path'], $config['twig']['options']);
 
-    $view->addExtension(new TwigExtension(
-        $container['router'],
-        $container['request']->getUri()
-    ));
-    $view->addExtension(new Twig_Extension_Debug());
+    $view->addExtension(new TwigExtension($container['router'], $container['request']->getUri()));
+    $view->addExtension(new DebugExtension());
+    $view->addExtension(new CsrfExtension($container['csrf']));
+    $view->addExtension(new ValidatorExtension($container['validator']));
     $view->addExtension(new AssetExtension(
         $container['request'],
-        isset($settings['assets']['base_path']) ? $settings['assets']['base_path'] : ''
+        $config['assets']['base_path'] ?? null
     ));
-    $view->addExtension(new ValidatorExtension($container['validator']));
 
     $view->getEnvironment()->addGlobal('flash', $container['flash']);
     $view->getEnvironment()->addGlobal('auth', $container['auth']);
@@ -67,11 +71,11 @@ $container['view'] = function ($container) {
 };
 
 $container['monolog'] = function ($container) {
-    $settings = $container['settings']['monolog'];
+    $config = $container['config']['monolog'];
 
-    $logger = new Logger($settings['name']);
+    $logger = new Logger($config['name']);
     $logger->pushProcessor(new UidProcessor());
-    $logger->pushHandler(new StreamHandler($settings['path'], Logger::DEBUG));
+    $logger->pushHandler(new StreamHandler($config['path'], $config['level']));
 
     return $logger;
 };
