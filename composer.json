@@ -1,36 +1,47 @@
 {
-    "name": "LouisCuny/slim-base",
-    "description": "Boilerplate for Slim PHP micro-framework - forked from awurth/slim-base",
-    "keywords": ["slim", "eloquent", "twig", "framework", "boilerplate", "skeleton"],
-    "homepage": "https://github.com/LouisCuny/slim-base",
-    "authors": [
-        {
-            "name": "Louis Cuny",
-            "email": "louis-cuny@orange.fr",
-            "homepage": "https://github.com/LouisCuny"
-        }
-    ],
-    "autoload": {
-        "psr-4": {
-            "App\\": "src/App"
-        }
-    },
-    "require": {
-        "cartalyst/sentinel": "^2.0",
-        "illuminate/database": "^5.4",
-        "illuminate/events": "^5.4",
-        "monolog/monolog": "^1.23",
-        "respect/validation": "^1.1",
-        "slim/csrf": "^0.8.1",
-        "slim/flash": "^0.2.0",
-        "slim/slim": "^3.8",
-        "slim/twig-view": "^2.3",
-        "symfony/http-foundation": "^3.3"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "scripts": {
-        "start": "php -S 0.0.0.0:1111 -t public public/index.php"
+  "name": "LouisCuny/slim-base",
+  "description": "Boilerplate for Slim PHP micro-framework - forked from awurth/slim-base",
+  "keywords": [
+    "slim",
+    "eloquent",
+    "twig",
+    "framework",
+    "boilerplate",
+    "skeleton"
+  ],
+  "homepage": "https://github.com/LouisCuny/slim-base",
+  "authors": [
+    {
+      "name": "Louis Cuny",
+      "email": "louis-cuny@orange.fr",
+      "homepage": "https://github.com/LouisCuny"
     }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Admin\\": "src/Admin",
+      "App\\": "src/App",
+      "Security\\": "src/Security"
+    }
+  },
+  "require": {
+    "php": ">=7.2",
+    "cartalyst/sentinel": "^2.0",
+    "illuminate/database": "^5.4",
+    "illuminate/events": "^5.4",
+    "monolog/monolog": "^1.23",
+    "respect/validation": "^1.1",
+    "slim/csrf": "^0.8.1",
+    "slim/flash": "^0.2.0",
+    "slim/slim": "^3.8",
+    "slim/twig-view": "^2.3",
+    "symfony/console": "^3.3",
+    "symfony/http-foundation": "^3.3"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "scripts": {
+    "start": "php -S 0.0.0.0:1111 -t public public/index.php"
+  }
 }

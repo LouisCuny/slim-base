@@ -1,7 +1,6 @@
 .idea/
 vendor/
 public/lib/
-app/parameters.yml
 var/cache/*
 !var/cache/.gitkeep
 var/logs/*

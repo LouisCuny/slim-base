@@ -5,21 +5,7 @@ use Illuminate\Database\Schema\Blueprint;
 use Cartalyst\Sentinel\Native\Facades\Sentinel;
 use Cartalyst\Sentinel\Native\SentinelBootstrapper;
 
-$sentinel = (new Sentinel(new SentinelBootstrapper(__DIR__ . '/../sentinel.php')))->getSentinel();
-
-$dropTables = [
-    'activations',
-    'persistences',
-    'reminders',
-    'role_users',
-    'throttle',
-    'roles',
-    'user'
-];
-
-foreach ($dropTables as $table) {
-    Manager::schema()->dropIfExists($table);
-}
+$sentinel = (new Sentinel(new SentinelBootstrapper(__DIR__ . '/../config/sentinel.php')))->getSentinel();
 
 Manager::schema()->create('user', function (Blueprint $table) {
     $table->increments('id');

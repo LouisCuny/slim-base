@@ -4,8 +4,13 @@ session_start();
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$settings = require __DIR__ . '/../app/settings.php';
-$app = new Slim\App($settings);
+$app = new Slim\App([
+    'env' => 'prod',
+    'root_dir' => dirname(__DIR__)
+]);
+$container = $app->getContainer();
+
+$container['config'] = require __DIR__ . '/../app/config/config.php';
 
 require __DIR__ . '/../app/dependencies.php';
 
@@ -15,6 +20,6 @@ require __DIR__ . '/../app/middleware.php';
 
 require __DIR__ . '/../app/controllers.php';
 
-require __DIR__ . '/../app/routes.php';
+require __DIR__ . '/../app/routing.php';
 
 $app->run();
