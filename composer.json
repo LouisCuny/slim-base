@@ -1,5 +1,5 @@
 {
-  "name": "LouisCuny/slim-base",
+  "name": "louis-cuny/slim-base",
   "description": "Boilerplate for Slim PHP micro-framework - forked from awurth/slim-base",
   "keywords": [
     "slim",
@@ -9,12 +9,12 @@
     "boilerplate",
     "skeleton"
   ],
-  "homepage": "https://github.com/LouisCuny/slim-base",
+  "homepage": "https://github.com/louis-cuny/slim-base",
   "authors": [
     {
       "name": "Louis Cuny",
       "email": "louis-cuny@orange.fr",
-      "homepage": "https://github.com/LouisCuny"
+      "homepage": "https://github.com/louis-cuny"
     }
   ],
   "autoload": {
@@ -25,7 +25,7 @@
     }
   },
   "require": {
-    "php": ">=7.2",
+    "php": "^7.1",
     "cartalyst/sentinel": "^2.0",
     "illuminate/database": "^5.4",
     "illuminate/events": "^5.4",
@@ -42,6 +42,6 @@
     "sort-packages": true
   },
   "scripts": {
-    "start": "php -S 0.0.0.0:1111 -t public public/index.php"
+    "start": "php -S 0.0.0.0:8080 -t public public/index.php"
   }
 }
