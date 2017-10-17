@@ -1,14 +1,7 @@
 {
   "name": "louis-cuny/slim-base",
   "description": "Boilerplate for Slim PHP micro-framework - forked from awurth/slim-base",
-  "keywords": [
-    "slim",
-    "eloquent",
-    "twig",
-    "framework",
-    "boilerplate",
-    "skeleton"
-  ],
+  "keywords": ["slim", "eloquent", "twig", "framework", "boilerplate", "skeleton"],
   "homepage": "https://github.com/louis-cuny/slim-base",
   "authors": [
     {
